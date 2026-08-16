@@ -1,5 +1,13 @@
 "use client";
-import { MoveLeft, MoveRight } from "lucide-react";
+import {
+  Badge,
+  Diamond,
+  Fan,
+  MoveLeft,
+  MoveRight,
+  Pentagon,
+  Square,
+} from "lucide-react";
 import {
   AnimatePresence,
   MotionConfig,
@@ -15,11 +23,42 @@ import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import { type CaseStudy, caseStudies } from "@/lib/case-studies-data";
+import { Marquee } from "../ui/marquee";
 
 export default function ProjectSection() {
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
 
-  return isSmallScreen ? <SmallScreenView /> : <LargeScreenView />;
+  return (
+    <section id="projects" className="mt-12">
+      <Marquee>
+        <div className="flex gap-6 lg:gap-12 items-center mr-2 lg:mr-10">
+          <h3 className="text-6xl lg:text-9xl xl:text-[10rem] font-bold text-neutral-800 tracking-tight">
+            Our Works
+          </h3>
+          <Badge className="size-20 lg:size-48 text-border animate-spin animation-duration-20000" />
+        </div>
+        <div className="flex gap-6 lg:gap-12 items-center mr-2 lg:mr-10">
+          <h3 className="text-6xl lg:text-9xl xl:text-[10rem] font-bold text-neutral-800 tracking-tight">
+            Our Works
+          </h3>
+          <Square className="size-20 lg:size-48 text-border animate-spin animation-duration-20000" />
+        </div>
+        <div className="flex gap-6 lg:gap-12 items-center mr-2 lg:mr-10">
+          <h3 className="text-6xl lg:text-9xl xl:text-[10rem] font-bold text-neutral-800 tracking-tight">
+            Our Works
+          </h3>
+          <Pentagon className="size-20 lg:size-48 text-border animate-spin animation-duration-20000" />
+        </div>
+        <div className="flex gap-6 lg:gap-12 items-center mr-2 lg:mr-10">
+          <h3 className="text-6xl lg:text-9xl xl:text-[10rem] font-bold text-neutral-800 tracking-tight">
+            Our Works
+          </h3>
+          <Diamond className="size-20 lg:size-48 text-border animate-spin animation-duration-20000" />
+        </div>
+      </Marquee>
+      {isSmallScreen ? <SmallScreenView /> : <LargeScreenView />}
+    </section>
+  );
 }
 
 type Direction = 1 | -1;
@@ -40,7 +79,6 @@ const SLOT = {
     rotateY: -15,
     opacity: 0.55,
     zIndex: 1,
-    transformStyle: "preserve-3d",
   },
   center: { x: "0%", z: 0, scale: 1, rotateY: 0, opacity: 1, zIndex: 2 },
   right: {
@@ -50,7 +88,6 @@ const SLOT = {
     rotateY: 15,
     opacity: 0.55,
     zIndex: 1,
-    transformStyle: "preserve-3d",
   },
 } satisfies Record<SlotPosition, TargetAndTransition>;
 
@@ -158,7 +195,7 @@ function LargeScreenView() {
         ease: "easeInOut",
       }}
     >
-      <section id="projects" ref={containerRef} className="h-[150dvh] relative">
+      <div ref={containerRef} className="h-[150dvh] relative">
         <AnimatePresence>
           <motion.div
             layout
@@ -182,7 +219,7 @@ function LargeScreenView() {
                   )
                   .map(({ pos, item }) => (
                     <motion.div
-                      key={item.id}
+                      key={`${item.id}`}
                       className="absolute inset-0 flex flex-col items-center will-change-transform"
                       style={
                         state === "zooming" && pos === "center"
@@ -275,7 +312,7 @@ function LargeScreenView() {
             </motion.div>
           </motion.div>
         </AnimatePresence>
-      </section>
+      </div>
     </MotionConfig>
   );
 }
@@ -294,28 +331,7 @@ const MImage = motion.create(Image);
 
 function SmallScreenView() {
   return (
-    <section id="projects" className="py-12 px-6">
-      <div className="flex flex-col items-center gap-6 mb-16">
-        <motion.h2
-          variants={mobileVars}
-          initial="initial"
-          whileInView="inView"
-          viewport={{ once: true, amount: "all" }}
-          className="text-3xl font-semibold"
-        >
-          Recent Highlights.
-        </motion.h2>
-        <motion.p
-          variants={mobileVars}
-          initial="initial"
-          whileInView="inView"
-          viewport={{ once: true, amount: "all" }}
-          className="text-sm font-medium text-pretty text-center px-4"
-        >
-          See how thoughtful design helped these products launch, grow, and win
-          users over.
-        </motion.p>
-      </div>
+    <div id="projects" className="py-12 px-6">
       <div className="space-y-8">
         {caseStudies.map((study) => (
           <Link className="block" href={study.url} key={study.id}>
@@ -336,11 +352,11 @@ function SmallScreenView() {
                 initial="initial"
                 whileInView="inView"
                 viewport={{ once: true, amount: "all" }}
-                className="bg-neutral-200 rounded-2xl p-4"
+                className="bg-neutral-100 rounded-2xl p-4"
               >
-                <div className="flex justify-between items-center gap-4">
-                  <h3 className="font-medium">{study.title}</h3>
-                  <span className="text-xs">{study.category}</span>
+                <div className="flex flex-col">
+                  <h3 className="font-medium text-lg">{study.title}</h3>
+                  <span className="text-sm">{study.category}</span>
                 </div>
                 <p className="text-xs mt-2">{study.description}</p>
               </motion.div>
@@ -348,6 +364,6 @@ function SmallScreenView() {
           </Link>
         ))}
       </div>
-    </section>
+    </div>
   );
 }

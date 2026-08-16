@@ -29,6 +29,9 @@ export default function ServicesSection() {
         className="flex flex-col py-32 mt-8 bg-black rounded-2xl text-neutral-100 mx-2 relative overflow-hidden"
       >
         <NoiseTexture />
+        <div className="size-[50vw] bg-white/10 top-[-60vw] translate-y-1/2 right-8 blur-[128px] absolute" />
+        <div className="size-[50vw] bg-white/10 bottom-[-60vw] -translate-y-1/2 left-8 blur-[128px] absolute" />
+
         <motion.div
           variants={variants}
           initial="initial"
@@ -55,11 +58,11 @@ export default function ServicesSection() {
             whileInView="inView"
             viewport={{ once: true, amount: "all" }}
             layout
-            className="grid grid-cols-[0.15fr_0.85fr] lg:grid-cols-[0.25fr_0.75fr] px-8 mt-20 z-1"
+            className="grid grid-cols-[0.15fr_0.85fr] lg:grid-cols-[0.25fr_0.75fr] px-8 mt-8 lg:mt-20 z-1"
           >
             <div />
             <Link
-              className="bg-background text-foreground px-6 py-4 w-fit font-medium text-lg rounded-full"
+              className="bg-background text-foreground px-6 py-4 w-fit font-medium lg:text-lg rounded-full"
               href="#contact"
             >
               Get Started

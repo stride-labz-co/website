@@ -46,47 +46,41 @@ export const caseStudies: CaseStudy[] = [
     slug: "hue-fabric",
     title: "Hue Fabric",
     category: "Fashion Commerce / Streetwear",
-    url: "https://huefabric.vercel.app/",
+    url: "https://huefabric.vercel.app",
     description:
       "A modern streetwear e-commerce experience built for bold product discovery, high-impact apparel drops, and a smooth shopping journey.",
-    img: "https://images.pexels.com/photos/5418890/pexels-photo-5418890.jpeg",
+    img: "https://images.pexels.com/photos/5418890/pexels-photo-5418890.jpeg?auto=compress&cs=tinysrgb&w=800",
   },
   {
     id: "02",
     slug: "voice-of-vadodara",
     title: "Voice of Vadodara",
     category: "Civic Tech / Citizen Platform",
-    url: "https://voiceofvadodara.vercel.app/",
+    url: "https://voiceofvadodara.vercel.app",
     description:
       "A citizen-driven platform built to help people report local issues, track progress, and create awareness around real problems in Vadodara.",
-    img: "https://images.pexels.com/photos/5475754/pexels-photo-5475754.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: "https://images.pexels.com/photos/374016/pexels-photo-374016.jpeg?auto=compress&cs=tinysrgb&w=800",
   },
   {
     id: "03",
     slug: "higrow",
     title: "HiGrow",
     category: "Learning Marketplace / Workshop Platform",
-    url: "https://higrow-test.vercel.app/",
+    url: "https://higrow-test.vercel.app",
     description:
       "An online marketplace for workshops, learning, creativity, and community growth.",
-    img: "https://images.pexels.com/photos/5428012/pexels-photo-5428012.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: "https://images.pexels.com/photos/35347469/pexels-photo-35347469.jpeg?auto=compress&cs=tinysrgb&w=800",
   },
-  // {
-  //   id: "04",
-  //   slug: "voice-of-vadodara-new",
-  //   title: "Voice of Vadodara",
-  //   category: "Civic Tech / Citizen Platform",
-  //   url: "https://voiceofvadodara.vercel.app/",
-  //   description:
-  //     "A citizen-driven platform built to help people report local issues, track progress, and create awareness around real problems in Vadodara. The system turns public concerns into structured civic action through a clean, accessible, and community-first interface.",
-  //   color: "#D9FF3F", // Neon Lime Accent
-  //   systemStatus: "LIVE",
-  //   version: "v2.0.5",
-  //   uptime: "99.82%",
-  //   img: "https://images.pexels.com/photos/5475754/pexels-photo-5475754.jpeg?auto=compress&cs=tinysrgb&w=800",
-  //   latency: "58ms",
-  //   database: "Supabase // Civic",
-  // },
+  {
+    id: "04",
+    slug: "fake",
+    title: "FakeItem",
+    category: "Fake Item / Mock Item",
+    url: "https://example.com",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966.",
+    img: "https://images.pexels.com/photos/16445673/pexels-photo-16445673.jpeg?auto=compress&cs=tinysrgb&w=800",
+  },
 ];
 
 export const projectDetails: Record<string, ProjectDetail> = {

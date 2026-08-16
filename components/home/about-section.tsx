@@ -1,9 +1,16 @@
 "use client";
-import { motion, type Variants } from "motion/react";
+import {
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  useTransform,
+  type Variants,
+} from "motion/react";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import LinkedInIcon from "@/assets/icons/linkedin.svg";
-import DhanamImage from "@/assets/person/dhanam.jpeg";
-import YagnikImage from "@/assets/person/yagnik.jpeg";
+import DhanamImage from "@/assets/person/dhanam.png";
+import YagnikImage from "@/assets/person/yagnik.png";
 
 const variants: Variants = {
   initial: { opacity: 0 },
@@ -38,9 +45,23 @@ const profileCardsVariants: Variants = {
 };
 
 export default function AboutSection() {
+  const paraRef = useRef(null);
+  const [progress, setProgress] = useState(0);
+
+  const { scrollYProgress } = useScroll({
+    target: paraRef,
+    offset: ["start 80%", "start 20%"],
+  });
+
+  const percentage = useTransform(scrollYProgress, [0, 1], [0, 100]);
+
+  useMotionValueEvent(percentage, "change", (latest) => {
+    setProgress(Math.floor(latest));
+  });
+
   return (
     <motion.section id="about" className="px-6 lg:px-12 mt-24">
-      <motion.h3
+      {/*<motion.h3
         variants={variants}
         initial="initial"
         whileInView="inView"
@@ -56,7 +77,18 @@ export default function AboutSection() {
           design that moves at the speed of your ambition
         </span>
         , you need a different kind of studio.
-      </motion.h3>
+      </motion.h3>*/}
+      <h3
+        ref={paraRef}
+        className="text-4xl lg:text-7xl font-semibold tracking-tighter lg:leading-18 text-muted-foreground lg:mb-24"
+      >
+        <FadeInScroll
+          text={
+            "Traditional agencies perfected the art of the pitch. We perfected the art of the work. When you need design that moves at the speed of your ambition, you need a different kind of studio."
+          }
+          progress={progress}
+        />
+      </h3>
       <div className="mt-12 grid lg:grid-cols-[0.6fr_0.4fr] mb-24">
         <div>
           <motion.h3
@@ -158,5 +190,32 @@ export default function AboutSection() {
         </div>
       </div>
     </motion.section>
+  );
+}
+
+interface Props {
+  text: string;
+  progress: number;
+}
+
+function FadeInScroll({ text, progress }: Props) {
+  const splited = text.split(" ");
+
+  return (
+    <>
+      {splited.map((word, index) => (
+        <motion.span
+          animate={{
+            color:
+              Math.floor(((index + 1) / splited.length) * 100) <= progress
+                ? "var(--foreground)"
+                : "var(--sidebar-ring)",
+          }}
+          key={index.toString()}
+        >
+          {word}{" "}
+        </motion.span>
+      ))}
+    </>
   );
 }
