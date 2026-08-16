@@ -11,8 +11,16 @@ import {
   type Variants,
 } from "motion/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
+import { useMediaQuery } from "usehooks-ts";
 import { type CaseStudy, caseStudies } from "@/lib/case-studies-data";
+
+export default function ProjectSection() {
+  const isSmallScreen = useMediaQuery("(max-width: 768px)");
+
+  return isSmallScreen ? <SmallScreenView /> : <LargeScreenView />;
+}
 
 type Direction = 1 | -1;
 type SlotPosition = "left" | "center" | "right";
@@ -32,6 +40,7 @@ const SLOT = {
     rotateY: -15,
     opacity: 0.55,
     zIndex: 1,
+    transformStyle: "preserve-3d",
   },
   center: { x: "0%", z: 0, scale: 1, rotateY: 0, opacity: 1, zIndex: 2 },
   right: {
@@ -41,12 +50,21 @@ const SLOT = {
     rotateY: 15,
     opacity: 0.55,
     zIndex: 1,
+    transformStyle: "preserve-3d",
   },
 } satisfies Record<SlotPosition, TargetAndTransition>;
 
 const variants: Variants = {
   ...SLOT,
-  enter: ({ dir, isClickAnim }: { dir: Direction; isClickAnim: boolean }) =>
+  enter: ({
+    dir,
+    isClickAnim,
+    pos,
+  }: {
+    dir: Direction;
+    isClickAnim: boolean;
+    pos: SlotPosition;
+  }) =>
     isClickAnim
       ? {
           x: dir > 0 ? "150%" : "-150%",
@@ -55,9 +73,21 @@ const variants: Variants = {
           rotateY: dir > 0 ? 45 : -45,
           opacity: 0,
           zIndex: 0,
+          transformStyle: "preserve-3d",
         }
-      : { opacity: 0 },
-  exit: ({ dir, isClickAnim }: { dir: Direction; isClickAnim: boolean }) =>
+      : {
+          opacity: 0,
+          x: pos === "left" ? "-120%" : pos === "right" ? "120%" : "0%",
+          transformStyle: "preserve-3d",
+        },
+  exit: ({
+    dir,
+    isClickAnim,
+  }: {
+    dir: Direction;
+    isClickAnim: boolean;
+    pos: SlotPosition;
+  }) =>
     isClickAnim
       ? {
           x: dir > 0 ? "-150%" : "150%",
@@ -66,17 +96,21 @@ const variants: Variants = {
           rotateY: dir > 0 ? -45 : 45,
           opacity: 0,
           zIndex: 0,
+          transformStyle: "preserve-3d",
         }
-      : { opacity: 0 },
+      : {
+          opacity: 0,
+          transformStyle: "preserve-3d",
+        },
 };
 
-export default function ProjectSection() {
+function LargeScreenView() {
   const containerRef = useRef(null);
   const [state, setState] = useState<"zooming" | "stable">("zooming");
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start center", "end end"],
+    offset: ["start end", "end end"],
   });
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
@@ -125,7 +159,7 @@ export default function ProjectSection() {
         ease: "easeInOut",
       }}
     >
-      <div ref={containerRef} className="h-[150dvh] relative">
+      <section id="projects" ref={containerRef} className="h-[150dvh] relative">
         <AnimatePresence>
           <motion.div
             layout
@@ -155,7 +189,7 @@ export default function ProjectSection() {
                       key={item.id}
                       className="absolute inset-0 flex flex-col items-center will-change-transform"
                       style={{ transformStyle: "preserve-3d" }}
-                      custom={{ direction, isClickAnim: isAnimating }}
+                      custom={{ direction, isClickAnim: isAnimating, pos }}
                       variants={variants}
                       initial="enter"
                       animate={pos}
@@ -222,14 +256,14 @@ export default function ProjectSection() {
                   className="flex gap-2"
                 >
                   <button
-                    className="aspect-square p-4 rounded-full bg-black/20"
+                    className="aspect-square p-4 rounded-full bg-muted"
                     type="button"
                     onClick={() => go(-1)}
                   >
                     <MoveLeft className="size-4" />
                   </button>
                   <button
-                    className="aspect-square p-4 rounded-full bg-black/20"
+                    className="aspect-square p-4 rounded-full bg-muted"
                     type="button"
                     onClick={() => go(1)}
                   >
@@ -240,7 +274,79 @@ export default function ProjectSection() {
             </AnimatePresence>
           </motion.div>
         </AnimatePresence>
-      </div>
+      </section>
     </MotionConfig>
+  );
+}
+
+const mobileVars: Variants = {
+  initial: { opacity: 0 },
+  inView: { opacity: 1, transition: { duration: 0.5 } },
+};
+
+const imageZoomIn: Variants = {
+  initial: { opacity: 0, scale: 1.2 },
+  inView: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+};
+
+const MImage = motion.create(Image);
+
+function SmallScreenView() {
+  return (
+    <section id="projects" className="py-12 px-6">
+      <div className="flex flex-col items-center gap-6 mb-16">
+        <motion.h2
+          variants={mobileVars}
+          initial="initial"
+          whileInView="inView"
+          viewport={{ once: true, amount: "all" }}
+          className="text-3xl font-semibold"
+        >
+          Recent Highlights.
+        </motion.h2>
+        <motion.p
+          variants={mobileVars}
+          initial="initial"
+          whileInView="inView"
+          viewport={{ once: true, amount: "all" }}
+          className="text-sm font-medium text-pretty text-center px-4"
+        >
+          See how thoughtful design helped these products launch, grow, and win
+          users over.
+        </motion.p>
+      </div>
+      <div className="space-y-8">
+        {caseStudies.map((study) => (
+          <Link className="block" href={study.url} key={study.id}>
+            <motion.div layout className="space-y-2">
+              <motion.div className="w-full relative aspect-3/2 rounded-2xl overflow-hidden">
+                <MImage
+                  variants={imageZoomIn}
+                  initial="initial"
+                  whileInView="inView"
+                  viewport={{ once: true }}
+                  fill
+                  src={study.img}
+                  alt={study.title}
+                />
+              </motion.div>
+              <motion.div
+                variants={mobileVars}
+                initial="initial"
+                whileInView="inView"
+                viewport={{ once: true, amount: "all" }}
+                className="bg-neutral-200 rounded-2xl p-4"
+              >
+                <div className="flex justify-between items-center gap-4">
+                  <h3 className="font-medium">{study.title}</h3>
+                  <span className="text-xs">{study.category}</span>
+                </div>
+                <p className="text-xs mt-2">{study.description}</p>
+              </motion.div>
+            </motion.div>
+          </Link>
+        ))}
+      </div>
+    </section>
   );
 }

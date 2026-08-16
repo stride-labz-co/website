@@ -3,7 +3,7 @@ import { NumberTicker } from "@/components/ui/number-ticker";
 
 export default function Numbers() {
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 py-24 mt-12 px-8 gap-12">
+    <div className="grid grid-cols-2 lg:grid-cols-4 py-24 mt-12 px-6 lg:px-12 gap-12">
       <div>
         <h3 className="text-5xl lg:text-8xl font-semibold">
           <NumberTicker value={10} />+

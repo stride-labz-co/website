@@ -5,13 +5,7 @@ export interface CaseStudy {
   category: string;
   url: string;
   description: string;
-  color: string;
-  systemStatus: string;
-  version: string;
-  uptime: string;
   img: string;
-  latency: string;
-  database: string;
 }
 
 export interface ProjectDetail {
@@ -54,14 +48,8 @@ export const caseStudies: CaseStudy[] = [
     category: "Fashion Commerce / Streetwear",
     url: "https://huefabric.vercel.app/",
     description:
-      "A modern streetwear e-commerce experience built for bold product discovery, high-impact apparel drops, and a smooth shopping journey. Hue Fabric combines strong fashion visuals, clean product presentation, and conversion-focused UX to create a premium digital storefront for a Gen-Z clothing brand.",
-    color: "#D9FF3F", // Neon Lime Accent
-    systemStatus: "ACTIVE",
-    version: "v3.2.1",
-    uptime: "99.97%",
+      "A modern streetwear e-commerce experience built for bold product discovery, high-impact apparel drops, and a smooth shopping journey.",
     img: "https://images.pexels.com/photos/5418890/pexels-photo-5418890.jpeg",
-    latency: "42ms",
-    database: "PostgreSQL // Core",
   },
   {
     id: "02",
@@ -70,14 +58,8 @@ export const caseStudies: CaseStudy[] = [
     category: "Civic Tech / Citizen Platform",
     url: "https://voiceofvadodara.vercel.app/",
     description:
-      "A citizen-driven platform built to help people report local issues, track progress, and create awareness around real problems in Vadodara. The system turns public concerns into structured civic action through a clean, accessible, and community-first interface.",
-    color: "#D9FF3F", // Neon Lime Accent
-    systemStatus: "LIVE",
-    version: "v2.0.5",
-    uptime: "99.82%",
+      "A citizen-driven platform built to help people report local issues, track progress, and create awareness around real problems in Vadodara.",
     img: "https://images.pexels.com/photos/5475754/pexels-photo-5475754.jpeg?auto=compress&cs=tinysrgb&w=800",
-    latency: "58ms",
-    database: "Supabase // Civic",
   },
   {
     id: "03",
@@ -86,14 +68,8 @@ export const caseStudies: CaseStudy[] = [
     category: "Learning Marketplace / Workshop Platform",
     url: "https://higrow-test.vercel.app/",
     description:
-      "An online marketplace for workshops, learning, creativity, and community growth. HiGrow helps users discover workshops, join learning opportunities, contact organisers, and explore skill-building experiences through a simple and scalable platform.",
-    color: "#D9FF3F", // Neon Lime Accent
-    systemStatus: "BETA",
-    version: "v1.8.3",
-    uptime: "99.45%",
+      "An online marketplace for workshops, learning, creativity, and community growth.",
     img: "https://images.pexels.com/photos/5428012/pexels-photo-5428012.jpeg?auto=compress&cs=tinysrgb&w=800",
-    latency: "31ms",
-    database: "Prisma // Scale",
   },
   // {
   //   id: "04",

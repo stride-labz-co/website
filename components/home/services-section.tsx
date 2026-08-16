@@ -5,32 +5,42 @@ import {
   LayoutGroup,
   MotionConfig,
   motion,
+  type Variants,
 } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-// import NoiseImage from "@/assets/noise.png";
+import { NoiseTexture } from "@/components/ui/noise-texture";
 import { services } from "@/lib/services-data";
 import { cn } from "@/lib/utils";
+
+const variants: Variants = {
+  initial: { opacity: 0 },
+  inView: { opacity: 1, transition: { duration: 0.5 } },
+};
 
 export default function ServicesSection() {
   return (
     <MotionConfig
       transition={{ type: "tween", duration: 0.3, ease: "circInOut" }}
     >
-      <div className="py-32 mt-8 bg-black rounded-2xl text-neutral-100 mx-2 relative overflow-hidden">
-        {/*<Image
-          className="object-cover w-full opacity-5 pointer-events-none absolute inset-0"
-          src={NoiseImage}
-          alt="noise"
-        />*/}
-        {/*<div />*/}
-        <div className="grid lg:grid-cols-[0.25fr_0.75fr] px-8 mb-20 gap-4">
+      <section
+        id="services"
+        className="flex flex-col py-32 mt-8 bg-black rounded-2xl text-neutral-100 mx-2 relative overflow-hidden"
+      >
+        <NoiseTexture />
+        <motion.div
+          variants={variants}
+          initial="initial"
+          whileInView="inView"
+          viewport={{ once: true, amount: "all" }}
+          className="grid lg:grid-cols-[0.25fr_0.75fr] px-8 mb-20 gap-4 z-1"
+        >
           <p className="flex items-center gap-2 font-medium h-fit">
             <CirclePlus className="size-4" /> What we do
           </p>
           <h2 className="text-6xl lg:text-9xl font-semibold">Services.</h2>
-        </div>
+        </motion.div>
         <LayoutGroup>
           {services.map((service, i) => (
             <ServiceCard
@@ -40,8 +50,12 @@ export default function ServicesSection() {
             />
           ))}
           <motion.div
+            variants={variants}
+            initial="initial"
+            whileInView="inView"
+            viewport={{ once: true, amount: "all" }}
             layout
-            className="grid grid-cols-[0.25fr_0.75fr] px-8 mt-20"
+            className="grid grid-cols-[0.15fr_0.85fr] lg:grid-cols-[0.25fr_0.75fr] px-8 mt-20 z-1"
           >
             <div />
             <Link
@@ -52,7 +66,7 @@ export default function ServicesSection() {
             </Link>
           </motion.div>
         </LayoutGroup>
-      </div>
+      </section>
     </MotionConfig>
   );
 }
@@ -68,10 +82,14 @@ function ServiceCard({
 
   return (
     <motion.button
+      variants={variants}
+      initial="initial"
+      whileInView="inView"
+      viewport={{ once: true, amount: "all" }}
       type="button"
       layout
       className={cn(
-        "grid grid-cols-[0.15fr_0.85fr] lg:grid-cols-[0.25fr_0.75fr] px-8 w-full overflow-hidden",
+        "grid grid-cols-[0.15fr_0.85fr] lg:grid-cols-[0.25fr_0.75fr] px-8 w-full overflow-hidden z-1",
       )}
       onClick={() => setIsOpen(!isOpen)}
     >
@@ -136,7 +154,7 @@ function ServiceCard({
                 exit={{ opacity: 0, y: 150 }}
                 layout
                 key={`short-${service.num}`}
-                className="text-2xl w-fit text-left"
+                className="text-xl lg:text-2xl w-fit text-left"
               >
                 {service.name}
               </motion.p>
