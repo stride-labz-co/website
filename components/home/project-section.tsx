@@ -2,7 +2,6 @@
 import {
   Badge,
   Diamond,
-  Fan,
   MoveLeft,
   MoveRight,
   Pentagon,
@@ -110,12 +109,10 @@ const variants: Variants = {
           rotateY: dir > 0 ? 45 : -45,
           opacity: 0,
           zIndex: 0,
-          transformStyle: "preserve-3d",
         }
       : {
           opacity: 0,
           x: pos === "left" ? "-120%" : pos === "right" ? "120%" : "0%",
-          transformStyle: "preserve-3d",
         },
   exit: ({
     dir,
@@ -133,11 +130,9 @@ const variants: Variants = {
           rotateY: dir > 0 ? -45 : 45,
           opacity: 0,
           zIndex: 0,
-          transformStyle: "preserve-3d",
         }
       : {
           opacity: 0,
-          transformStyle: "preserve-3d",
         },
 };
 
@@ -212,6 +207,7 @@ function LargeScreenView() {
               <AnimatePresence
                 custom={{ direction, isClickAnim: isAnimating }}
                 initial={false}
+                // onExitComplete={markDone}
               >
                 {slots
                   .filter((i) =>
@@ -219,7 +215,8 @@ function LargeScreenView() {
                   )
                   .map(({ pos, item }) => (
                     <motion.div
-                      key={`${item.id}`}
+                      key={`${item.id}-${state}`}
+                      layout={false}
                       className="absolute inset-0 flex flex-col items-center will-change-transform"
                       style={
                         state === "zooming" && pos === "center"
@@ -241,9 +238,7 @@ function LargeScreenView() {
                         ease: "easeInOut",
                       }}
                       onAnimationComplete={() => {
-                        if (pos === "center") {
-                          setIsAnimating(false);
-                        }
+                        if (pos === "center") setIsAnimating(false);
                       }}
                     >
                       <Image
@@ -267,12 +262,12 @@ function LargeScreenView() {
               <motion.h2
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-2xl font-bold mt-4"
+                className="text-3xl font-bold mt-4"
               >
                 {items[activeIndex].title}
               </motion.h2>
               <motion.p
-                className="max-w-prose text-sm text-pretty text-center"
+                className="max-w-prose text-pretty text-center mt-2"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{

@@ -7,7 +7,7 @@ import {
   type Variants,
 } from "motion/react";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import LinkedInIcon from "@/assets/icons/linkedin.svg";
 import DhanamImage from "@/assets/person/dhanam.png";
 import YagnikImage from "@/assets/person/yagnik.png";
