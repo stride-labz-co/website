@@ -20,13 +20,21 @@ export default function HeroSection() {
     <MotionConfig
       transition={{ type: "tween", duration: 0.4, ease: "easeInOut" }}
     >
-      <main
+      <motion.main
         id="hero"
-        className="flex-1 flex flex-col m-2 z-30 mt-0 relative bg-alt-background rounded-3xl overflow-hidden min-h-[calc(100dvh-(--spacing(18)))]"
+        className="flex-1 flex flex-col m-2 z-30 mt-0 relative rounded-3xl overflow-hidden min-h-[calc(100dvh-(--spacing(18)))]"
+        animate={{
+          backgroundColor: ["var(--background)", "var(--alt-background)"],
+          transition: { delay: 0.3 },
+        }}
       >
         <motion.div
           initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+            transition: { type: "tween", duration: 0.5, ease: "easeInOut" },
+          }}
           style={{ translateY: fdTranslateY }}
           className="absolute max-lg:-bottom-1/3 inset-0 z-2 pointer-events-none"
         >
@@ -53,7 +61,7 @@ export default function HeroSection() {
                 scale: 1,
                 transformOrigin: "left",
                 transition: {
-                  delay: 0.2,
+                  delay: 0.3,
                   type: "tween",
                   duration: 0.4,
                   ease: "easeInOut",
@@ -71,7 +79,7 @@ export default function HeroSection() {
                 scale: 1,
                 transformOrigin: "left",
                 transition: {
-                  delay: 0.3,
+                  delay: 0.4,
                   type: "tween",
                   duration: 0.4,
                   ease: "easeInOut",
@@ -89,7 +97,7 @@ export default function HeroSection() {
                 scale: 1,
                 transformOrigin: "left",
                 transition: {
-                  delay: 0.4,
+                  delay: 0.5,
                   type: "tween",
                   duration: 0.4,
                   ease: "easeInOut",
@@ -109,7 +117,7 @@ export default function HeroSection() {
                 scale: 1,
                 transformOrigin: "left",
                 transition: {
-                  delay: 0.4,
+                  delay: 0.5,
                   type: "tween",
                   duration: 0.4,
                   ease: "easeInOut",
@@ -120,7 +128,7 @@ export default function HeroSection() {
             </motion.div>
           </div>
         </motion.div>
-      </main>
+      </motion.main>
     </MotionConfig>
   );
 }

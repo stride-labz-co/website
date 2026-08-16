@@ -120,7 +120,7 @@ export default function AboutSection() {
             </h4>
             <p className="max-lg:text-sm text-muted-foreground">Co-founder</p>
             <a
-              className="flex gap-2 items-center text-blue-500 underline px-4 py-2 bg-background justify-center rounded-xl mt-2"
+              className="flex gap-2 items-center text-blue-500 underline px-4 py-2 bg-background justify-center rounded-xl mt-2 max-lg:text-sm"
               href="https://www.linkedin.com/in/dhanam-patel"
               target="_blank"
               rel="noopener noreferrer"
@@ -148,7 +148,7 @@ export default function AboutSection() {
             </h4>
             <p className="max-lg:text-sm text-muted-foreground">Co-founder</p>
             <a
-              className="flex gap-2 items-center text-blue-500 underline px-4 py-2 bg-background justify-center rounded-xl mt-2"
+              className="flex gap-2 items-center text-blue-500 underline px-4 py-2 bg-background justify-center rounded-xl mt-2 max-lg:text-sm"
               href="https://www.linkedin.com/in/yagnikpt"
               target="_blank"
               rel="noopener noreferrer"
