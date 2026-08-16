@@ -47,9 +47,6 @@ export default function AboutSection() {
         viewport={{ once: true, amount: "all" }}
         className="text-4xl lg:text-7xl font-semibold tracking-tighter lg:leading-18 text-muted-foreground"
       >
-        <span className="text-lg tracking-normal mr-4 lg:mr-12 align-text-top leading-relaxed lg:leading-[3] text-neutral-800">
-          [Our Approach]
-        </span>
         Traditional agencies perfected the art of the pitch.{" "}
         <span className="text-neutral-800">
           We perfected the art of the work.
@@ -74,6 +71,7 @@ export default function AboutSection() {
             repeatedly. Talented designers spending more time in meetings than
             creating. Clients paying for process instead of progress. Great
             ideas dying in revision purgatory.
+            <span className="mr-2 lg:ml-12">&rdquo;</span>
           </motion.h3>
           <div className="grid lg:grid-cols-2 gap-4 mt-4">
             <motion.p

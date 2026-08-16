@@ -124,7 +124,6 @@ function LargeScreenView() {
   const intro = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], {
     scale: [0.6, 0.8, 1, 1],
     opacity: [0, 0.5, 1, 1],
-    filter: ["blur(10px)", "blur(0px)", "blur(0px)", "blur(0px)"],
   });
 
   const items = [...caseStudies];
@@ -171,9 +170,6 @@ function LargeScreenView() {
               className="w-160 aspect-3/2 my-4 relative"
               style={{
                 transformStyle: "preserve-3d",
-                scale: intro.scale,
-                opacity: intro.opacity,
-                filter: intro.filter,
               }}
             >
               <AnimatePresence
@@ -188,7 +184,15 @@ function LargeScreenView() {
                     <motion.div
                       key={item.id}
                       className="absolute inset-0 flex flex-col items-center will-change-transform"
-                      style={{ transformStyle: "preserve-3d" }}
+                      style={
+                        state === "zooming" && pos === "center"
+                          ? {
+                              transformStyle: "preserve-3d",
+                              scale: intro.scale,
+                              opacity: intro.opacity,
+                            }
+                          : { transformStyle: "preserve-3d" }
+                      }
                       custom={{ direction, isClickAnim: isAnimating, pos }}
                       variants={variants}
                       initial="enter"
@@ -216,62 +220,59 @@ function LargeScreenView() {
                   ))}
               </AnimatePresence>
             </motion.div>
-            <AnimatePresence mode="popLayout">
-              {activeIndex !== undefined && state === "stable" && (
-                <motion.div
-                  layout="y"
-                  className="flex flex-col items-center gap-1 mb-4"
-                  key={items[activeIndex].id}
-                >
-                  <motion.h2
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-2xl font-bold mt-4"
-                  >
-                    {items[activeIndex].title}
-                  </motion.h2>
-                  <motion.p
-                    className="max-w-prose text-sm text-pretty text-center"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      type: "tween",
-                      duration: 0.4,
-                      ease: "easeInOut",
-                      delay: 0.2,
-                    }}
-                  >
-                    {items[activeIndex].description}
-                  </motion.p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-            <AnimatePresence>
-              {state === "stable" && (
-                <motion.div
-                  initial={{ opacity: 0, y: 80 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 80 }}
-                  layout="y"
-                  className="flex gap-2"
-                >
-                  <button
-                    className="aspect-square p-4 rounded-full bg-muted"
-                    type="button"
-                    onClick={() => go(-1)}
-                  >
-                    <MoveLeft className="size-4" />
-                  </button>
-                  <button
-                    className="aspect-square p-4 rounded-full bg-muted"
-                    type="button"
-                    onClick={() => go(1)}
-                  >
-                    <MoveRight className="size-4" />
-                  </button>
-                </motion.div>
-              )}
-            </AnimatePresence>
+
+            <motion.div
+              animate={{ opacity: state === "stable" ? 1 : 0 }}
+              layout="y"
+              className="flex flex-col items-center gap-1 mb-4"
+              key={items[activeIndex].id}
+            >
+              <motion.h2
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-2xl font-bold mt-4"
+              >
+                {items[activeIndex].title}
+              </motion.h2>
+              <motion.p
+                className="max-w-prose text-sm text-pretty text-center"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  type: "tween",
+                  duration: 0.4,
+                  ease: "easeInOut",
+                  delay: 0.2,
+                }}
+              >
+                {items[activeIndex].description}
+              </motion.p>
+            </motion.div>
+
+            <motion.div
+              animate={
+                state === "stable"
+                  ? { opacity: 1, y: 0 }
+                  : { opacity: 0, y: 80 }
+              }
+              layout="y"
+              className="flex gap-2"
+            >
+              <button
+                className="aspect-square p-4 rounded-full bg-muted"
+                type="button"
+                onClick={() => go(-1)}
+              >
+                <MoveLeft className="size-4" />
+              </button>
+              <button
+                className="aspect-square p-4 rounded-full bg-muted"
+                type="button"
+                onClick={() => go(1)}
+              >
+                <MoveRight className="size-4" />
+              </button>
+            </motion.div>
           </motion.div>
         </AnimatePresence>
       </section>

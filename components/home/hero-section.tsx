@@ -9,11 +9,9 @@ const MImage = motion.create(Image);
 export default function HeroSection() {
   const { scrollY } = useScroll();
 
-  const bgTranslateY = useTransform(scrollY, [0, 50, 200], {
-    translateY: [0, 25, 100],
-    opacity: [1, 1, 0.5],
-    filter: ["blur(0px)", "blur(0px)", "blur(3px)"],
-  });
+  const translateY = useTransform(scrollY, [0, 50, 200], [0, 25, 100]);
+  const opacity = useTransform(scrollY, [0, 50, 200], [1, 1, 0.5]);
+
   const fdTranslateY = useTransform(scrollY, [0, 350], [0, -40]);
 
   return (
@@ -49,8 +47,8 @@ export default function HeroSection() {
           />
         </motion.div>
         <motion.div
-          style={bgTranslateY}
-          className="pt-12 lg:pt-24 xl:pt-32 px-6 lg:px-12 z-1 flex justify-between"
+          style={{ translateY, opacity }}
+          className="pt-12 lg:pt-24 xl:pt-32 px-6 lg:px-12 z-1 flex justify-between will-change-transform"
         >
           <div>
             <motion.h2
