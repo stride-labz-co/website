@@ -100,8 +100,8 @@ const variants: Variants = {
     dir: Direction;
     isClickAnim: boolean;
     pos: SlotPosition;
-  }) =>
-    isClickAnim
+  }) => {
+    return isClickAnim
       ? {
           x: dir > 0 ? "150%" : "-150%",
           z: -400,
@@ -113,15 +113,9 @@ const variants: Variants = {
       : {
           opacity: 0,
           x: pos === "left" ? "-120%" : pos === "right" ? "120%" : "0%",
-        },
-  exit: ({
-    dir,
-    isClickAnim,
-  }: {
-    dir: Direction;
-    isClickAnim: boolean;
-    pos: SlotPosition;
-  }) =>
+        };
+  },
+  exit: ({ dir, isClickAnim }: { dir: Direction; isClickAnim: boolean }) =>
     isClickAnim
       ? {
           x: dir > 0 ? "-150%" : "150%",
@@ -205,9 +199,8 @@ function LargeScreenView() {
               }}
             >
               <AnimatePresence
-                custom={{ direction, isClickAnim: isAnimating }}
+                custom={{ dir: direction, isClickAnim: isAnimating }}
                 initial={false}
-                // onExitComplete={markDone}
               >
                 {slots
                   .filter((i) =>
@@ -215,19 +208,22 @@ function LargeScreenView() {
                   )
                   .map(({ pos, item }) => (
                     <motion.div
-                      key={`${item.id}-${state}`}
+                      key={`${item.id}`}
                       layout={false}
-                      className="absolute inset-0 flex flex-col items-center will-change-transform"
+                      className="absolute inset-0 will-change-transform"
                       style={
                         state === "zooming" && pos === "center"
                           ? {
-                              transformStyle: "preserve-3d",
                               scale: intro.scale,
                               opacity: intro.opacity,
                             }
-                          : { transformStyle: "preserve-3d" }
+                          : {}
                       }
-                      custom={{ direction, isClickAnim: isAnimating, pos }}
+                      custom={{
+                        dir: direction,
+                        isClickAnim: isAnimating,
+                        pos,
+                      }}
                       variants={variants}
                       initial="enter"
                       animate={pos}
