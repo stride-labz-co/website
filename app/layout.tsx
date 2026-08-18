@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 const sans = Google_Sans_Flex({
   variable: "--font-google-sans-flex",
   subsets: ["latin"],
+  fallback: ["system-ui"],
 });
 
 export const metadata: Metadata = {

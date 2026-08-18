@@ -15,10 +15,10 @@ export default function Nav() {
       <motion.header
         initial={{ y: "-100%", opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="flex justify-between items-center px-6 lg:px-10 z-50 sticky top-0 bg-background h-16"
+        className="flex justify-between items-center px-6 lg:px-10 z-50 sticky top-0 bg-background/70 backdrop-blur-xl h-16"
       >
         <Link href="/#hero" className="text-xl font-bold">
-          StrideLabs
+          StrideLabz
         </Link>
         {/*<div className="flex justify-between items-center w-full">*/}
         <Link href="#about" className="font-medium hidden lg:block">

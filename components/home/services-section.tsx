@@ -1,5 +1,5 @@
 "use client";
-import { CirclePlus, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import {
   AnimatePresence,
   LayoutGroup,
@@ -22,29 +22,37 @@ const variants: Variants = {
 export default function ServicesSection() {
   return (
     <MotionConfig
-      transition={{ type: "tween", duration: 0.3, ease: "circInOut" }}
+      transition={{ type: "tween", duration: 0.4, ease: "circInOut" }}
     >
-      <section
-        id="services"
-        className="flex flex-col py-32 mt-8 bg-black rounded-2xl text-neutral-100 mx-2 relative overflow-hidden"
-      >
-        <NoiseTexture />
-        <div className="size-[50vw] bg-white/10 top-[-60vw] translate-y-1/2 right-8 blur-[128px] absolute" />
-        <div className="size-[50vw] bg-white/10 bottom-[-60vw] -translate-y-1/2 left-8 blur-[128px] absolute" />
-
-        <motion.div
-          variants={variants}
-          initial="initial"
-          whileInView="inView"
-          viewport={{ once: true, amount: "all" }}
-          className="grid lg:grid-cols-[0.25fr_0.75fr] px-8 mb-20 gap-4 z-1"
+      <LayoutGroup>
+        <motion.section
+          id="services"
+          className="flex flex-col py-32 mt-8 bg-black rounded-2xl text-neutral-100 mx-2 relative overflow-hidden"
         >
-          <p className="flex items-center gap-2 font-medium h-fit">
-            <CirclePlus className="size-4" /> What we do
-          </p>
-          <h2 className="text-6xl lg:text-9xl font-semibold">Services.</h2>
-        </motion.div>
-        <LayoutGroup>
+          <NoiseTexture />
+          <div className="size-[50vw] bg-white/10 top-[-60vw] translate-y-1/2 right-8 blur-[128px] absolute" />
+          <div className="size-[50vw] bg-white/10 bottom-[-60vw] -translate-y-1/2 left-8 blur-[128px] absolute" />
+
+          <motion.div
+            variants={variants}
+            initial="initial"
+            whileInView="inView"
+            viewport={{ once: true, amount: "all" }}
+            className="grid lg:grid-cols-[0.25fr_0.75fr] px-8 mb-20 gap-4 z-1"
+          >
+            <p className="flex items-center gap-2 font-medium h-fit">
+              <span className="size-5 grid place-content-center bg-background rounded-full text-foreground">
+                <Plus className="size-4" />
+              </span>{" "}
+              What we do
+            </p>
+            <h2 className="text-6xl lg:text-9xl font-semibold">
+              Services.
+              <sup className="text-muted-foreground text-4xl align-super">
+                ({services.length})
+              </sup>
+            </h2>
+          </motion.div>
           {services.map((service, i) => (
             <ServiceCard
               isOpenInitial={i === 0}
@@ -68,8 +76,8 @@ export default function ServicesSection() {
               Get Started
             </Link>
           </motion.div>
-        </LayoutGroup>
-      </section>
+        </motion.section>
+      </LayoutGroup>
     </MotionConfig>
   );
 }
@@ -106,14 +114,14 @@ function ServiceCard({
         layout
         className="flex border-b border-neutral-800 py-6 gap-12"
       >
-        <motion.div layout className="w-full">
+        <motion.div layout className="w-full relative flex flex-col">
           <AnimatePresence initial={false} mode="popLayout">
             {isOpen ? (
               <motion.div
-                initial={{ opacity: 0, y: -100 }}
+                initial={{ opacity: 0, y: -50 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -100 }}
-                layout
+                exit={{ opacity: 0, y: -50 }}
+                layout="y"
                 key={`long-${service.num}`}
                 className="grid lg:grid-cols-[0.2fr_0.4fr_0.4fr] gap-8 pb-8"
               >
@@ -125,9 +133,12 @@ function ServiceCard({
                   alt={service.desc}
                 />
                 <div className="text-left">
-                  <h2 className="text-2xl lg:text-3xl font-medium">
+                  <motion.h2
+                    layoutId={`${service.num}-title`}
+                    className="text-2xl lg:text-3xl font-medium w-fit"
+                  >
                     {service.name}
-                  </h2>
+                  </motion.h2>
                   <p className="text-xs lg:text-base mt-2 text-neutral-400 font-medium">
                     {service.desc}
                   </p>
@@ -152,11 +163,12 @@ function ServiceCard({
               </motion.div>
             ) : (
               <motion.p
-                initial={{ opacity: 0, y: 150 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 150 }}
+                // initial={{ opacity: 0, y: 200 }}
+                // animate={{ opacity: 1, y: 0 }}
+                // exit={{ opacity: 0, y: 200 }}
                 layout
                 key={`short-${service.num}`}
+                layoutId={`${service.num}-title`}
                 className="text-xl lg:text-2xl w-fit text-left"
               >
                 {service.name}

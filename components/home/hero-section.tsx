@@ -9,10 +9,10 @@ const MImage = motion.create(Image);
 export default function HeroSection() {
   const { scrollY } = useScroll();
 
-  const translateY = useTransform(scrollY, [0, 50, 200], [0, 25, 100]);
-  const opacity = useTransform(scrollY, [0, 50, 200], [1, 1, 0.5]);
+  const translateY = useTransform(scrollY, [0, 600], [0, 150]);
+  const opacity = useTransform(scrollY, [0, 50, 500], [1, 1, 0.5]);
 
-  const fdTranslateY = useTransform(scrollY, [0, 350], [0, -40]);
+  const fdTranslateY = useTransform(scrollY, [0, 600], [0, -40]);
 
   return (
     <MotionConfig
@@ -124,6 +124,12 @@ export default function HeroSection() {
             >
               <CTAButton href="#contact">Get Started</CTAButton>
             </motion.div>
+          </div>
+          <div className="bg-background rounded-2xl p-2 max-w-xs shadow max-md:hidden">
+            <p className="text-lg p-2 rounded-xl bg-neutral-900 text-neutral-100">
+              Interactive UI systems engineered for fluid motion,
+              responsiveness, and immersive navigation experiences.
+            </p>
           </div>
         </motion.div>
       </motion.main>

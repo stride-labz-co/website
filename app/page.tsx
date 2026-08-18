@@ -1,5 +1,6 @@
 import BottomBlur from "@/components/bottom-blur";
 import AboutSection from "@/components/home/about-section";
+import ContactSection from "@/components/home/contact";
 import HeroSection from "@/components/home/hero-section";
 import Numbers from "@/components/home/numbers";
 import ProjectSection from "@/components/home/project-section";
@@ -18,6 +19,7 @@ export default function Home() {
       <ProjectSection />
       <ServicesSection />
       <Numbers />
+      <ContactSection />
     </>
   );
 }

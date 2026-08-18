@@ -4,15 +4,15 @@ import { AnimatePresence, MotionConfig, motion } from "motion/react";
 import Link from "next/link";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { NoiseTexture } from "./ui/noise-texture";
 
 const MChevronRight = motion.create(ChevronRight);
+const MLink = motion.create(Link);
 
 type Props = {
   href?: string;
   children: React.ReactNode;
 };
-
-const MLink = motion.create(Link);
 
 export default function CTAButton({ children, href }: Props) {
   const [isHovered, setIsHovered] = useState(false);
@@ -26,6 +26,7 @@ export default function CTAButton({ children, href }: Props) {
         className="flex relative bg-neutral-900 p-1 text-white rounded-2xl overflow-hidden cursor-pointer w-fit"
         layout
       >
+        <NoiseTexture noiseOpacity={0.7} />
         <AnimatePresence initial={false} mode="popLayout">
           <motion.div
             key="expander"

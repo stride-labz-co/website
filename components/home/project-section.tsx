@@ -21,6 +21,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
+import FlakeIcon from "@/assets/icons/flake.svg";
 import { type CaseStudy, caseStudies } from "@/lib/case-studies-data";
 import { Marquee } from "../ui/marquee";
 
@@ -28,35 +29,19 @@ export default function ProjectSection() {
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
 
   return (
-    <section id="projects" className="mt-12">
-      <Marquee>
-        <div className="flex gap-6 lg:gap-12 items-center mr-2 lg:mr-10">
-          <h3 className="text-6xl lg:text-9xl xl:text-[10rem] font-bold text-neutral-800 tracking-tight">
-            Our Works
-          </h3>
-          <Badge className="size-20 lg:size-48 text-border animate-spin animation-duration-20000" />
-        </div>
-        <div className="flex gap-6 lg:gap-12 items-center mr-2 lg:mr-10">
-          <h3 className="text-6xl lg:text-9xl xl:text-[10rem] font-bold text-neutral-800 tracking-tight">
-            Our Works
-          </h3>
-          <Square className="size-20 lg:size-48 text-border animate-spin animation-duration-20000" />
-        </div>
-        <div className="flex gap-6 lg:gap-12 items-center mr-2 lg:mr-10">
-          <h3 className="text-6xl lg:text-9xl xl:text-[10rem] font-bold text-neutral-800 tracking-tight">
-            Our Works
-          </h3>
-          <Pentagon className="size-20 lg:size-48 text-border animate-spin animation-duration-20000" />
-        </div>
-        <div className="flex gap-6 lg:gap-12 items-center mr-2 lg:mr-10">
-          <h3 className="text-6xl lg:text-9xl xl:text-[10rem] font-bold text-neutral-800 tracking-tight">
-            Our Works
-          </h3>
-          <Diamond className="size-20 lg:size-48 text-border animate-spin animation-duration-20000" />
-        </div>
-      </Marquee>
+    <>
+      <section id="projects" className="mt-12">
+        <Marquee>
+          <div className="flex gap-12 items-center mr-8 lg:mr-10">
+            <h3 className="text-9xl lg:text-9xl xl:text-[10rem] font-bold text-neutral-800 tracking-tight">
+              Our Works
+            </h3>
+            <FlakeIcon className="size-32 lg:size-40 text-border animate-spin direction-reverse animation animation-duration-20000" />
+          </div>
+        </Marquee>
+      </section>
       {isSmallScreen ? <SmallScreenView /> : <LargeScreenView />}
-    </section>
+    </>
   );
 }
 
@@ -237,27 +222,32 @@ function LargeScreenView() {
                         if (pos === "center") setIsAnimating(false);
                       }}
                     >
-                      <Image
-                        className="aspect-3/2 w-full object-cover rounded-xl"
-                        height={300}
-                        width={600}
-                        src={item.img}
-                        alt={item.title}
-                      />
+                      <Link className="block" href={item.url}>
+                        <Image
+                          className="aspect-3/2 w-full object-cover rounded-xl"
+                          height={300}
+                          width={600}
+                          src={item.img}
+                          alt={item.title}
+                        />
+                      </Link>
                     </motion.div>
                   ))}
               </AnimatePresence>
             </motion.div>
 
             <motion.div
-              animate={{ opacity: state === "stable" ? 1 : 0 }}
               layout="y"
               className="flex flex-col items-center gap-1 mb-4"
               key={items[activeIndex].id}
             >
               <motion.h2
                 initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
+                animate={
+                  state === "stable"
+                    ? { opacity: 1, y: 0 }
+                    : { opacity: 0, y: 10 }
+                }
                 className="text-3xl font-bold mt-4"
               >
                 {items[activeIndex].title}
@@ -265,7 +255,11 @@ function LargeScreenView() {
               <motion.p
                 className="max-w-prose text-pretty text-center mt-2"
                 initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
+                animate={
+                  state === "stable"
+                    ? { opacity: 1, y: 0 }
+                    : { opacity: 0, y: 10 }
+                }
                 transition={{
                   type: "tween",
                   duration: 0.4,
