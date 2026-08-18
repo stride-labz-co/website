@@ -1,3 +1,9 @@
+import type { StaticImageData } from "next/image";
+import HighGrowImage from "@/assets/projects/higrow_light.webp";
+import HueFiberImage from "@/assets/projects/huefabric_light.webp";
+import VOVImage from "@/assets/projects/voiceofvadodara_light.webp";
+import YourCardImage from "@/assets/projects/yourcard_light.webp";
+
 export interface CaseStudy {
   id: string;
   slug: string;
@@ -5,7 +11,7 @@ export interface CaseStudy {
   category: string;
   url: string;
   description: string;
-  img: string;
+  img: StaticImageData;
 }
 
 export interface ProjectDetail {
@@ -49,7 +55,7 @@ export const caseStudies: CaseStudy[] = [
     url: "https://huefabric.vercel.app",
     description:
       "A modern streetwear e-commerce experience built for bold product discovery, high-impact apparel drops, and a smooth shopping journey.",
-    img: "https://images.pexels.com/photos/5418890/pexels-photo-5418890.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: HueFiberImage,
   },
   {
     id: "02",
@@ -59,7 +65,7 @@ export const caseStudies: CaseStudy[] = [
     url: "https://voiceofvadodara.vercel.app",
     description:
       "A citizen-driven platform built to help people report local issues, track progress, and create awareness around real problems in Vadodara.",
-    img: "https://images.pexels.com/photos/374016/pexels-photo-374016.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: VOVImage,
   },
   {
     id: "03",
@@ -69,17 +75,17 @@ export const caseStudies: CaseStudy[] = [
     url: "https://higrow-test.vercel.app",
     description:
       "An online marketplace for workshops, learning, creativity, and community growth.",
-    img: "https://images.pexels.com/photos/35347469/pexels-photo-35347469.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: HighGrowImage,
   },
   {
     id: "04",
-    slug: "fake",
-    title: "FakeItem",
-    category: "Fake Item / Mock Item",
-    url: "https://example.com",
+    slug: "yourcard",
+    title: "YourCard",
+    category: "Web Design / Landing Page",
+    url: "https://your-card-nine.vercel.app",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966.",
-    img: "https://images.pexels.com/photos/16445673/pexels-photo-16445673.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "More than a Card. Designed around the way you live, spend and grow. Rewards, travel and experiences, built into one premium experience.",
+    img: YourCardImage,
   },
 ];
 

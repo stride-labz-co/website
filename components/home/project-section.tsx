@@ -1,12 +1,5 @@
 "use client";
-import {
-  Badge,
-  Diamond,
-  MoveLeft,
-  MoveRight,
-  Pentagon,
-  Square,
-} from "lucide-react";
+import { MoveLeft, MoveRight } from "lucide-react";
 import {
   AnimatePresence,
   MotionConfig,
