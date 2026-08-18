@@ -1,5 +1,13 @@
+"use client";
+
 import { Gauge, Route } from "lucide-react";
+import { motion, type Variants } from "motion/react";
 import { NoiseTexture } from "../ui/noise-texture";
+
+const variants: Variants = {
+  initial: { opacity: 0 },
+  inView: { opacity: 1, transition: { duration: 0.5 } },
+};
 
 export default function ContactSection() {
   return (
@@ -12,7 +20,13 @@ export default function ContactSection() {
       <div className="size-[50vw] bg-white/10 bottom-[-60vw] -translate-y-1/2 left-8 blur-[128px] absolute" />
 
       <div className="basis-full w-full lg:basis-2/5 z-1">
-        <form className="space-y-4 bg-alt-background px-4 py-8 lg:p-12 text-foreground rounded-xl w-full">
+        <motion.form
+          variants={variants}
+          initial="initial"
+          whileInView="inView"
+          viewport={{ once: true, amount: "some" }}
+          className="space-y-4 bg-alt-background px-4 py-8 lg:p-12 text-foreground rounded-xl w-full"
+        >
           <h4 className="text-lg mb-2 font-semibold">StrideLabz</h4>
           <h3 className="text-3xl font-semibold mb-12 text-muted-foreground">
             <span className="text-foreground">Have a project</span> in mind?
@@ -58,28 +72,51 @@ export default function ContactSection() {
           >
             Send
           </button>
-        </form>
+        </motion.form>
       </div>
 
       <div className="basis-3/5 space-y-12 z-1">
-        <h2 className="text-7xl lg:text-9xl font-medium">Let’s talk.</h2>
-        <p className="text-2xl lg:text-3xl font-medium max-w-lg text-muted-foreground">
+        <motion.h2
+          variants={variants}
+          initial="initial"
+          whileInView="inView"
+          viewport={{ once: true, amount: "all" }}
+          className="text-7xl lg:text-9xl font-medium"
+        >
+          Let’s talk.
+        </motion.h2>
+        <motion.p
+          variants={variants}
+          initial="initial"
+          whileInView="inView"
+          viewport={{ once: true, amount: "all" }}
+          className="text-2xl lg:text-3xl font-medium max-w-lg text-muted-foreground"
+        >
           <span className="text-background">Tell us about your project</span>
           —whether it’s a website, SEO, or marketing.
-        </p>
+        </motion.p>
 
-        <a
+        <motion.a
+          variants={variants}
+          initial="initial"
+          whileInView="inView"
+          viewport={{ once: true, amount: "all" }}
           className="text-2xl lg:text-3xl font-medium block underline decoration-1 underline-offset-4"
           href="mailto:stridelabz@gmail.com"
           target="_blank"
           rel="noopener noreferrer"
         >
           stridelabz@gmail.com
-        </a>
+        </motion.a>
 
         <hr className="border-muted-foreground/50" />
         <div className="flex flex-col lg:flex-row gap-4 lg:items-center">
-          <div>
+          <motion.div
+            variants={variants}
+            initial="initial"
+            whileInView="inView"
+            viewport={{ once: true, amount: "all" }}
+          >
             <span className="flex items-center gap-4 font-medium text-lg">
               <Gauge className="size-6" /> Quick response.
             </span>
@@ -87,8 +124,13 @@ export default function ContactSection() {
               If you’re ready to create and collaborate, we’d love to hear from
               you.
             </p>
-          </div>
-          <div>
+          </motion.div>
+          <motion.div
+            variants={variants}
+            initial="initial"
+            whileInView="inView"
+            viewport={{ once: true, amount: "all" }}
+          >
             <span className="flex items-center gap-4 font-medium text-lg">
               <Route className="size-6" /> Clear next steps.
             </span>
@@ -96,7 +138,7 @@ export default function ContactSection() {
               After the consultation, we’ll provide you with a detailed plan and
               timeline.
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
