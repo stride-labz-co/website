@@ -57,7 +57,6 @@ export default function HeroSection() {
                 opacity: 1,
                 y: 0,
                 scale: 1,
-                transformOrigin: "left",
                 transition: {
                   delay: 0.3,
                   type: "tween",
@@ -65,6 +64,7 @@ export default function HeroSection() {
                   ease: "easeInOut",
                 },
               }}
+              style={{ transformOrigin: "left" }}
               className="text-5xl lg:text-7xl font-medium text-muted-foreground tracking-tighter"
             >
               Scale your ideas.
@@ -75,7 +75,6 @@ export default function HeroSection() {
                 opacity: 1,
                 y: 0,
                 scale: 1,
-                transformOrigin: "left",
                 transition: {
                   delay: 0.4,
                   type: "tween",
@@ -83,6 +82,7 @@ export default function HeroSection() {
                   ease: "easeInOut",
                 },
               }}
+              style={{ transformOrigin: "left" }}
               className="text-5xl lg:text-7xl font-medium tracking-tighter mt-1"
             >
               Build with AI.
@@ -93,7 +93,6 @@ export default function HeroSection() {
                 opacity: 1,
                 y: 0,
                 scale: 1,
-                transformOrigin: "left",
                 transition: {
                   delay: 0.5,
                   type: "tween",
@@ -101,6 +100,7 @@ export default function HeroSection() {
                   ease: "easeInOut",
                 },
               }}
+              style={{ transformOrigin: "left" }}
               className="text-sm lg:text-base font-light mt-4 max-w-[40ch]"
             >
               A digital product studio engineering interfaces, systems, and
@@ -113,7 +113,6 @@ export default function HeroSection() {
                 opacity: 1,
                 y: 0,
                 scale: 1,
-                transformOrigin: "left",
                 transition: {
                   delay: 0.5,
                   type: "tween",
@@ -121,6 +120,7 @@ export default function HeroSection() {
                   ease: "easeInOut",
                 },
               }}
+              style={{ transformOrigin: "left" }}
             >
               <CTAButton href="#contact">Get Started</CTAButton>
             </motion.div>
