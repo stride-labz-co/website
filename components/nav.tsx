@@ -109,6 +109,11 @@ export default function Nav() {
       <motion.header
         initial={{ y: "-100%", opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
+        transition={{
+          duration: 0.6,
+          ease: [0.22, 1, 0.36, 1],
+          delay: 1.95,
+        }}
         className={cn(
           "flex justify-between items-center px-6 lg:px-10 fixed top-0 left-0 right-0 z-50 h-16",
           "bg-background/75 backdrop-blur-xl",

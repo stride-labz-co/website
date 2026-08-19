@@ -13,14 +13,11 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
-import { useMediaQuery } from "usehooks-ts";
 import FlakeIcon from "@/assets/icons/flake.svg";
 import { type CaseStudy, caseStudies } from "@/lib/case-studies-data";
 import { Marquee } from "../ui/marquee";
 
 export default function ProjectSection() {
-  const isSmallScreen = useMediaQuery("(max-width: 768px)");
-
   return (
     <>
       <section id="projects" className="mt-12">
@@ -33,7 +30,12 @@ export default function ProjectSection() {
           </div>
         </Marquee>
       </section>
-      {isSmallScreen ? <SmallScreenView /> : <LargeScreenView />}
+      <div className="block md:hidden">
+        <SmallScreenView />
+      </div>
+      <div className="hidden md:block">
+        <LargeScreenView />
+      </div>
     </>
   );
 }
@@ -309,7 +311,7 @@ const MImage = motion.create(Image);
 
 function SmallScreenView() {
   return (
-    <div id="projects" className="py-12 px-6">
+    <div className="py-12 px-6">
       <div className="space-y-8">
         {caseStudies.map((study) => (
           <Link className="block" href={study.url} key={study.id}>

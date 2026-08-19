@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
         hostname: "images.pexels.com",
       },
     ],
+    qualities: [100, 75],
   },
   allowedDevOrigins: ["10.40.59.37"],
   turbopack: {

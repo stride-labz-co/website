@@ -1,4 +1,5 @@
 import BottomBlur from "@/components/bottom-blur";
+import CurtainIntro from "@/components/curtain-intro";
 import AboutSection from "@/components/home/about-section";
 import ContactSection from "@/components/home/contact";
 import HeroSection from "@/components/home/hero-section";
@@ -11,6 +12,7 @@ import Nav from "@/components/nav";
 export default function Home() {
   return (
     <>
+      <CurtainIntro />
       <LenisScroller />
       <BottomBlur />
       <Nav />

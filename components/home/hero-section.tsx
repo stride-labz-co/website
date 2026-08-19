@@ -23,7 +23,7 @@ export default function HeroSection() {
         className="flex-1 flex flex-col m-2 z-30 mt-0 relative rounded-3xl overflow-hidden min-h-[calc(100dvh-(--spacing(18)))]"
         animate={{
           backgroundColor: ["var(--background)", "var(--alt-background)"],
-          transition: { delay: 0.3 },
+          transition: { delay: 2.1 },
         }}
       >
         <motion.div
@@ -31,7 +31,12 @@ export default function HeroSection() {
           animate={{
             opacity: 1,
             scale: 1,
-            transition: { type: "tween", duration: 0.5, ease: "easeInOut" },
+            transition: {
+              delay: 2.1,
+              type: "tween",
+              duration: 0.8,
+              ease: "easeOut",
+            },
           }}
           style={{ translateY: fdTranslateY }}
           className="absolute max-lg:-bottom-1/3 inset-0 z-2 pointer-events-none"
@@ -44,6 +49,7 @@ export default function HeroSection() {
             fill
             src={HeroImage}
             alt="A computer."
+            quality={100}
           />
         </motion.div>
         <motion.div
@@ -58,10 +64,10 @@ export default function HeroSection() {
                 y: 0,
                 scale: 1,
                 transition: {
-                  delay: 0.3,
+                  delay: 2.25,
                   type: "tween",
-                  duration: 0.4,
-                  ease: "easeInOut",
+                  duration: 0.5,
+                  ease: [0.22, 1, 0.36, 1],
                 },
               }}
               style={{ transformOrigin: "left" }}
@@ -76,10 +82,10 @@ export default function HeroSection() {
                 y: 0,
                 scale: 1,
                 transition: {
-                  delay: 0.4,
+                  delay: 2.35,
                   type: "tween",
-                  duration: 0.4,
-                  ease: "easeInOut",
+                  duration: 0.5,
+                  ease: [0.22, 1, 0.36, 1],
                 },
               }}
               style={{ transformOrigin: "left" }}
@@ -94,10 +100,10 @@ export default function HeroSection() {
                 y: 0,
                 scale: 1,
                 transition: {
-                  delay: 0.5,
+                  delay: 2.45,
                   type: "tween",
-                  duration: 0.4,
-                  ease: "easeInOut",
+                  duration: 0.5,
+                  ease: [0.22, 1, 0.36, 1],
                 },
               }}
               style={{ transformOrigin: "left" }}
@@ -114,10 +120,10 @@ export default function HeroSection() {
                 y: 0,
                 scale: 1,
                 transition: {
-                  delay: 0.5,
+                  delay: 2.45,
                   type: "tween",
-                  duration: 0.4,
-                  ease: "easeInOut",
+                  duration: 0.5,
+                  ease: [0.22, 1, 0.36, 1],
                 },
               }}
               style={{ transformOrigin: "left" }}
